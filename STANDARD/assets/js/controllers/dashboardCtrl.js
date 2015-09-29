@@ -12,6 +12,8 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         var URLServidor = "http://blueheart.16mb.com/blueheart/services/"; 
 
+        $timeout( function(){
+
         $http.get(URLServidor +'leerDatos.php',data)
         .success(function (data){
             console.log(data.resultado);
@@ -19,6 +21,8 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
             $scope.flag = 1;
             $scope.botonA = true;
         });
+
+        },5000);
 
         $timeout( function(){
 
@@ -42,7 +46,7 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
                 $scope.mensaje = true;
             }
 
-        },3000);
+        },8000);
    /* $scope.data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
