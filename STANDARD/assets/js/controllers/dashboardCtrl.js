@@ -41,7 +41,7 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
                 $scope.mensaje = true;
             }
 
-        },500);
+        },3000);
    /* $scope.data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
