@@ -55,6 +55,8 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
                 $scope.mensaje = true;
             }
 
+            $scope.data = {};
+
             $scope.data.labels = $scope.labels;
             $scope.data.datasets[0].data = $scope.dataRec[0];
             $scope.data.datasets[1].data = $scope.dataRec[1];
