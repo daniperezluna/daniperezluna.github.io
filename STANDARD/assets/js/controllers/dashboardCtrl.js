@@ -8,7 +8,7 @@ app.controller('SparklineCtrl', ["$scope", function ($scope) {
     $scope.referrals = [4879, 6567, 5022, 5890, 9234, 7128, 4811];
 }]);
 
-app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout",o function ($scope, $http, $timeout) {
+app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, $http, $timeout) {
 
         var URLServidor = "http://blueheart.16mb.com/blueheart/services/"; 
 
