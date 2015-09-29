@@ -23,14 +23,15 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         var url = "http://blueheart.16mb.com/blueheart/services/"; 
 
-        $timeout( function(data){
+        $timeout( function(){
 
-        $http.jsonp(url+"leerDatos.php?callback=JSON_CALLBACK")
+        $http.jsonp(url+"leerDatos.php?callback=jsonp_callback")
         .success(function (data){
-            console.log(data.resultado);
-            $scope.datosRec = data.resultado;
-            $scope.flag = 1;
-            $scope.botonA = true;
+            $scope.data2 = JSON.stringify(data);
+            console.log(data2.resultado);
+            $scope.datosRec = data2.resultado;
+            //$scope.flag = 1;
+            //$scope.botonA = true;
         });
 
         },5000);
