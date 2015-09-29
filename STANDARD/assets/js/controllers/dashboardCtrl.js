@@ -21,11 +21,14 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
         //para que utilice los headers que definimos arriba
         $http.defaults.headers.post = defaultHTTPHeaders;
 
-        var URLServidor = "http://blueheart.16mb.com/blueheart/services/"; 
+        var url = "http://blueheart.16mb.com/blueheart/services/"; 
 
         $timeout( function(data){
 
-        $http.get(URLServidor +'leerDatos.php',data)
+        $http.({
+            method: 'JSONP',
+            url: url
+        })
         .success(function (data){
             console.log(data.resultado);
             $scope.datosRec = data.resultado;
