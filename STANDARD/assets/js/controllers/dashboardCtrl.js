@@ -55,6 +55,11 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
                 $scope.mensaje = true;
             }
 
+            $scope.data.labels = $scope.labels;
+            $scope.data.datasets[0].data = $scope.dataRec[0];
+            $scope.data.datasets[1].data = $scope.dataRec[1];
+            $scope.data.datasets[2].data = $scope.dataRec[2];
+            
         },8000);
    /* $scope.data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -80,7 +85,7 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
               data: [28, 48, 40, 19, 86, 27, 90, 102, 123, 145, 60, 161]
           }
         ]
-    };
+    };*/
 
     $scope.options = {
 
@@ -133,7 +138,7 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         //String - A legend template
         legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
-    };*/
+    };
 
 }]);
 app.controller('SalesCtrl', ["$scope", function ($scope) {
