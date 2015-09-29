@@ -12,8 +12,9 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         var URLServidor = "http://blueheart.16mb.com/blueheart/services/"; 
 
-        $http.get(URLServidor +'leerDatos.php')
+        $http.get(URLServidor +'leerDatos.php',data)
         .success(function (data){
+            console.log(data.resultado);
             $scope.datosRec = data.resultado;
             $scope.flag = 1;
             $scope.botonA = true;
