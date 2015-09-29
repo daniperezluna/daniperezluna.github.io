@@ -12,7 +12,7 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         var URLServidor = "http://blueheart.16mb.com/blueheart/services/"; 
 
-        $timeout( function(){
+        $timeout( function(data){
 
         $http.get(URLServidor +'leerDatos.php',data)
         .success(function (data){
