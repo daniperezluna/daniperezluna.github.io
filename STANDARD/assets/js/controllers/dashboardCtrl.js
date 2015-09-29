@@ -25,11 +25,10 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         $timeout( function(){
 
-        $http.jsonp(url+"leerDatos.php?callback=jsonp_callback")
+        $http.get(url+"leerDatos.php")
         .success(function (data){
-            $scope.data2 = JSON.stringify(data);
-            console.log(data2.resultado);
-            $scope.datosRec = data2.resultado;
+            console.log(data.resultado);
+            $scope.datosRec = data.resultado;
             //$scope.flag = 1;
             //$scope.botonA = true;
         });
