@@ -25,7 +25,7 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
 
         $timeout( function(data){
 
-        $http.jsonp(url+"leerDatos.php")
+        $http.jsonp(url+"leerDatos.php",data)
         .success(function (data){
             console.log(data.resultado);
             $scope.datosRec = data.resultado;
