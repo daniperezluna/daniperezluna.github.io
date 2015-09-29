@@ -10,6 +10,17 @@ app.controller('SparklineCtrl', ["$scope", function ($scope) {
 
 app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, $http, $timeout) {
 
+        //Objeto con la definición de los headers del request HTTP, vamos a enviarle
+        //el JSON al servidr y vamos a recibir JSON del servidor
+        var defaultHTTPHeaders = {
+            'Conten-Type': 'application/json',
+            'Accept': 'application/json'
+        };
+
+        //Al objeto $http, le establecemos sus propiedades por defecto
+        //para que utilice los headers que definimos arriba
+        $http.defaults.headers.post = defaultHTTPHeaders;
+
         var URLServidor = "http://blueheart.16mb.com/blueheart/services/"; 
 
         $timeout( function(data){
