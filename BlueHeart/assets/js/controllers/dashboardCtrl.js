@@ -4,28 +4,59 @@
 */
 var url = "http://blueheart.16mb.com/blueheart/services/"; 
 
+app.controller('UserCtrl', ["$scope", "flowFactory", function ($scope, flowFactory) {
+    $scope.removeImage = function () {
+        $scope.noImage = true;
+    };
+    $scope.obj = new Flow();
+
+    $scope.userInfo = {
+        firstName: 'Jose',
+        lastName: 'Mora',
+        url: '',
+        direccion: 'Calle Málaga, 43',
+        familiar: 'Josefa Mora Cárdenas',
+        email: '',
+        phone: '(641)-734-4763',
+        gender: 'male',
+        zipCode: '12345',
+        city: 'Córdoba (ES)',
+        avatar: 'assets/images/avatar-1-xl.jpg',
+        twitter: '',
+        github: '',
+        facebook: '',
+        linkedin: '',
+        google: '',
+        skype: '',
+        phoneFamilia: '666-999-999'
+    };
+    if ($scope.userInfo.avatar == '') {
+        $scope.noImage = true;
+    }
+}]);
+
 app.controller('TableCtrl', ["$scope", "$http", "$timeout", "ngTableParams", function ($scope, $http, $timeout, ngTableParams) {
     
 
 
-    $http.get(url+"leerDatos.php")
+    $scope.promiseTab = $http.get(url+"leerDatos.php")
     .success(function (data){
         console.log(data.resultado);
         $scope.datosRec = data.resultado;
+        console.log($scope.datosRec);
+        $scope.tableParams = new ngTableParams({
+            page: 1, // show first page
+            count: 5 // count per page
+        }, {
+            total: $scope.datosRec.length, // length of $scope.datosRec
+            getData: function ($defer, params) {
+                $defer.resolve($scope.datosRec.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        });
     });
-
-    $scope.promiseTab = $timeout( function(){
-    console.log($scope.datosRec);
-    $scope.tableParams = new ngTableParams({
-        page: 1, // show first page
-        count: 5 // count per page
-    }, {
-        total: $scope.datosRec.length, // length of $scope.datosRec
-        getData: function ($defer, params) {
-            $defer.resolve($scope.datosRec.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        }
-    });
-    },2500);
+/*
+     $timeout( function(){
+    },2500);*/
 }]);
 
 
@@ -47,13 +78,10 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
         $scope.totalDiastole = 0;
         $scope.totalPulso = 0 ;
         
-        $http.get(url+"leerDatos.php")
+        $scope.mypromise = $http.get(url+"leerDatos.php")
         .success(function (data){
-            console.log(data.resultado);
+            // console.log(data.resultado);
             $scope.datosRec = data.resultado;
-        });
-
-        $scope.mypromise = $timeout( function(){
 
             for(var i = 0; i < $scope.datosRec.length; i++) {
                 datosSistole[i] = $scope.datosRec[i].sistole;
@@ -77,6 +105,10 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
             $scope.totalSistole = parseInt(($scope.totalSistole)/7);
             $scope.totalDiastole = parseInt(($scope.totalDiastole)/7);
             $scope.totalPulso = parseInt(($scope.totalPulso)/7);
+
+            $scope.colorCor = tensionMedia($scope.totalSistole, $scope.totalDiastole);
+
+            console.log
             
             $scope.data = {
                 labels: $scope.labels,
@@ -254,8 +286,21 @@ app.controller('VisitsCtrl', [ "$scope", "$http", "$timeout", function ($scope, 
                 //String - A legend template
                 legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
             };
+        });
+    
+    function tensionMedia(sistole,diastole){
 
-        },4000);
+        if ((sistole < 129) || (diastole < 84)){
+          return "corVerde";
+        }
+        else if ((sistole >= 129 && sistole < 159) || (diastole >= 84 && diastole < 99)){
+          return "corNaranja";
+        }
+        else if ((sistole >= 159) || (diastole > 99)){
+          return "corRojo";
+        }
+    }
+    
 }]);
 
 app.controller('OnotherCtrl', ["$scope", function ($scope) {
