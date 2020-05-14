@@ -23,3 +23,5 @@ to build the 'standardversion' folder
 
 > grunt build:rtlversion
 to build the 'rtlversion' folder
+
+ONLY FOR EDUCATIONAL PURPOSES
